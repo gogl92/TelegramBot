@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bots: An introduction for developers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Bots: An introduction for developers">
+    <meta property="og:image" content="https://core.telegram.org/file/811140934/1/tbDSLHSaijc/fdcc7b6d5fb3354adf">
+    <meta property="og:description" content="Bots are special Telegram accounts designed to handle messages automatically. Users can interact with bots by sending them command messages in private or group chats. You control your bots using HTTPS requests to our new bot API. 1. What can I do with bots? To name just a few things, you could use bots to:  Integrate with other services.  A bot could potentially post comments remotely or control a smart home. It could also send you notifications via Telegram when something happens somewhere. (Examples: GitHub Bot, Image Bot). Create custom tools. A bot may provide you with alerts, weather forecasts, translations, or other services upon request. (Example: Poll bot). Build single- and multiplayer games. A bot can play chess and checkers against you, act as host in quiz games, or even take up the dungeon master&#39;s dice for an RPG. (Example: Trivia bot). Build social services. A bot could connect people looking for conversation partners based on common interests or proximity. (Example: Tinder-like HotOrBot). Do..">
+    <link rel="shortcut icon" href="/favicon.ico?3" type="image/x-icon" />
+
+    <link href="/css/bootstrap.min.css?2" rel="stylesheet">
+    
+    <link href="/css/telegram.css?84" rel="stylesheet" media="screen">
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="dev_page_wrap">
+      <div class="dev_page_head navbar navbar-static-top navbar-tg">
+        <div class="navbar-inner">
+          <div class="container clearfix">
+            <ul class="nav navbar-nav navbar-right hidden-xs"><li class="navbar-twitter"><a href="https://twitter.com/telegram" target="_blank" data-track="Follow/Twitter" onclick="trackDlClick(this, event)"><i class="icon icon-twitter"></i><span> Twitter</span></a></li></ul>
+            <ul class="nav navbar-nav">
+              <li><a href="//telegram.org/">Home</a></li>
+<li class="hidden-xs"><a href="//telegram.org/faq">FAQ</a></li>
+<li class="hidden-xs"><a href="//telegram.org/apps">Apps</a></li>
+<li class=""><a href="/api">API</a></li>
+<li class=""><a href="/mtproto">Protocol</a></li>
+<li class=""><a href="/schema">Schema</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container clearfix">
+        <div class="dev_page">
+          <div id="dev_page_content_wrap" class=" ">
+  <div class="dev_page_bread_crumbs"></div>
+  <h1 id="dev_page_title">Bots: An introduction for developers</h1>
+  
+  <div id="dev_page_content"><p>Bots are special Telegram accounts designed to handle messages automatically. Users can interact with bots by sending them command messages in private or group chats. You control your bots using HTTPS requests to our new <a href="/bots/api">bot API</a>.</p>
+<h4><a class="anchor" name="1-what-can-i-do-with-bots" href="#1-what-can-i-do-with-bots"><i class="anchor-icon"></i></a>1. What can I do with bots?</h4>
+<p>To name just a few things, you could use bots to:</p>
+<ul>
+<li><strong>Integrate with other services</strong>.  A bot could potentially post comments remotely or control a smart home. It could also send you notifications via Telegram when something happens somewhere. (Examples: <a href="https://telegram.me/githubbot"><strong>GitHub Bot</strong></a>, <a href="https://telegram.me/imagebot"><strong>Image Bot</strong></a>).</li>
+<li><strong>Create custom tools</strong>. A bot may provide you with alerts, weather forecasts, translations, or other services upon request. (Example: <a href="https://telegram.me/PollBot"><strong>Poll bot</strong></a>).</li>
+<li><strong>Build single- and multiplayer games</strong>. A bot can play chess and checkers against you, act as host in quiz games, or even take up the dungeon master&#39;s dice for an RPG. (Example: <a href="https://telegram.me/TriviaBot"><strong>Trivia bot</strong></a>).</li>
+<li><strong>Build social services</strong>. A bot could connect people looking for conversation partners based on common interests or proximity. (Example: Tinder-like <a href="https://telegram.me/hotorbot"><strong>HotOrBot</strong></a>).</li>
+<li><strong>Do virtually anything else</strong>. Except for dishes — bots are terrible at doing the dishes.</li>
+</ul>
+<h4><a class="anchor" name="2-how-do-bots-work" href="#2-how-do-bots-work"><i class="anchor-icon"></i></a>2. How do bots work?</h4>
+<p>Telegram Bots are special accounts that do not require an additional phone number to set up. These accounts serve as an interface for code running somewhere on your server.</p>
+<p>The best part is that you don&#39;t need to know anything about how our MTProto encryption protocol works — our intermediary server will handle all encryption and communication with the Telegram API for you! You communicate with this server via a simple HTTPS-interface that offers a simplified version of the Telegram API. We call that interface our <a href="/bots/api">Bot API</a>.</p>
+<blockquote>
+<p>A detailed description of the Bot API is available on <a href="/bots/api">this page »</a></p>
+</blockquote>
+<div>
+    <a href="/file/811140327/1/zlN4goPTupk/9ff2f2f01c4bd1b013" target="_blank"><img src="/file/811140934/1/tbDSLHSaijc/fdcc7b6d5fb3354adf" title="The Botfather. Click for hi-res picture"  style="max-width: 200px;float:right" /></a>
+</div>
+
+<h4><a class="anchor" name="3-how-do-i-create-a-bot" href="#3-how-do-i-create-a-bot"><i class="anchor-icon"></i></a>3. How do I create a bot?</h4>
+<p>There&#39;s a… bot for that. Just talk to <a href="https://telegram.me/botfather">BotFather</a> (described <a href="#botfather">below</a>) and follow a few simple steps. Once you&#39;ve created a bot and received your authorization token, head down to the <a href="/bots/api">Bot API manual</a> to see what you can teach your bot to do.</p>
+<h4><a class="anchor" name="4-how-are-bots-different-from-humans" href="#4-how-are-bots-different-from-humans"><i class="anchor-icon"></i></a>4. How are bots different from humans?</h4>
+<ul>
+<li>Bots have no online status and no last seen timestamps, the interface shows the label <strong>‘bot’</strong> instead.</li>
+<li>Bots have limited cloud storage — older messages may be removed by the server shortly after they have been processed.</li>
+<li>Bots can&#39;t initiate conversations with users. A user <strong>must</strong> either add them to a group or send them a message first. People can use <code>telegram.me/&lt;bot_username&gt;</code> links or username search to find your bot.</li>
+<li>Bot usernames always end in ‘bot’ (e.g. <a href="https://telegram.me/triviabot">@TriviaBot</a>, <a href="https://telegram.me/github_bot">@GitHub_bot</a>).</li>
+<li>When added to a group, bots do not receive all messages by default (see <a href="#privacy-mode">Privacy mode</a>).</li>
+<li>Bots never eat, sleep or complain (unless expressly programmed otherwise).</li>
+</ul>
+<hr>
+<h2><a class="anchor" name="bot-perks" href="#bot-perks"><i class="anchor-icon"></i></a>Bot perks</h2>
+<p>Telegram bots are unique in many ways — we offer <a href="#keyboards">customized keyboards</a>, additional interfaces for <a href="#global-commands">default commands</a> and <a href="#deep-linking">deep linking</a> as well as a special <a href="#privacy-mode">privacy mode</a> for groups.</p>
+<h4><a class="anchor" name="keyboards" href="#keyboards"><i class="anchor-icon"></i></a>Keyboards</h4>
+<p>One of the coolest things about our Bot API are the new <strong>custom keyboards</strong>. Whenever your bot sends a message, it can pass along a special keyboard with predefined reply options (see <a href="/bots/api/#replykeyboardmarkup">ReplyKeyboardMarkup</a>). Telegram apps that receive the message will display your keyboard to the user. Tapping any of the buttons will immediately send the respective command. This way you can drastically simplify user interaction with your bot.</p>
+<p>We currently support text and emoji for your buttons. Here are some custom keyboard examples:</p>
+<center><div>
+    <a href="/file/811140184/1/5YJxx-rostA/ad3f74094485fb97bd" target="_blank"><img src="/file/811140184/1/5YJxx-rostA/ad3f74094485fb97bd" title="Keyboard for a poll bot" style="max-height: 300px; padding: 10px 5px" /></a>
+
+    <a href="/file/811140880/1/jS-YSVkDCNQ/b397dfcefc6da0dc70" target="_blank"><img src="/file/811140880/1/jS-YSVkDCNQ/b397dfcefc6da0dc70" title="Keyboard for a calculator bot. Because you can." style="max-height: 300px; padding: 10px 5px" /></a>
+
+    <a href="/file/811140733/2/KoysqJKQ_kI/a1ee46a377796c3961" target="_blank"><img src="/file/811140733/2/KoysqJKQ_kI/a1ee46a377796c3961" title="Keyboard for a trivia bot" style="max-height: 300px; padding: 10px 5px" /></a><br><br>
+</div></center>
+
+<blockquote>
+<p>For more technical information on custom keyboards, please consult the <a href="/bots/api">Bot API manual</a> (see <a href="/bots/api#sendmessage">sendMessage</a>).</p>
+</blockquote>
+<h4><a class="anchor" name="commands" href="#commands"><i class="anchor-icon"></i></a>Commands</h4>
+<p>Commands present a more flexible way to communicate with your bot. The following syntax may be used:</p>
+<pre><code>/command [optional] [argument]</code></pre>
+<p>A command must always start with the ‘/’ symbol and may not be longer than 32 characters. Commands can use latin letters, numbers and underscores. Here are a few examples:</p>
+<pre><code>/get_messages_stats
+/set_timer 10min Alarm!
+/get_timezone London, UK</code></pre>
+<p>Messages that start with a slash will be always passed to the bot (along with replies to its messages and messages that @mention the bot by username). Telegram apps will:</p>
+<ul>
+<li>Suggest a list of <a href="#edit-settings">supported commands</a> with descriptions when the user enters a ‘/’ (for this to work, you need to have provided a list of commands to the <a href="#botfather">BotFather</a>). Tapping on a command in the list immediately sends the command.</li>
+<li>Show an additional <strong>(/)</strong> button in the input field in all chats with bots. Tapping it types a ‘/’ and shows the list of commands.</li>
+<li>Highlight <strong>/commands</strong> in messages. When the user taps a highlighted command, the command is sent at once.</li>
+</ul>
+<center><div>
+    <a href="/file/811140845/2/rNUxpcGDeQU/05eaaf20b0dbaf9cb3" target="_blank"><img src="/file/811140845/2/rNUxpcGDeQU/05eaaf20b0dbaf9cb3" title="Suggested commands" style="width: 230px; padding: 10px 5px" /></a>
+
+    <a href="/file/811140315/2/gf7_D2HbeyM/e3ca2de4de7918f826" target="_blank"><img src="/file/811140315/2/gf7_D2HbeyM/e3ca2de4de7918f826" title="Notice the new button in the input field, right next to the sticker button" style="width: 230px; padding: 10px 5px" /></a>
+
+
+    <a href="/file/811140029/1/s5zv4fbWdhw/a04aefa0ee0557f16a" target="_blank"><img src="/file/811140029/1/s5zv4fbWdhw/a04aefa0ee0557f16a" title="Suggested commands for multiple bots" style="width: 230px; padding: 10px 5px" /></a>
+
+<br><br>
+</div></center>
+
+
+<p>If multiple bots are in a group, it is possible to add bot usernames to commands in order to avoid confusion:</p>
+<pre><code>/start@TriviaBot
+/start@ApocalypseBot</code></pre>
+<p>This is done automatically when commands are selected via the list of suggestions. Please remember that your bot needs to be able to process commands that are followed by its username.</p>
+<h5><a class="anchor" name="global-commands" href="#global-commands"><i class="anchor-icon"></i></a>Global commands</h5>
+<p>In order to make it easier for users to navigate the bot multiverse, we ask all developers to support a few basic commands. Telegram apps will have <strong>interface shortcuts</strong> for these commands.</p>
+<ul>
+<li><strong>/start</strong> - begins interaction with the user, e.g., by sending a greeting message. This command can also be used to pass additional parameters to the bot (see <a href="#deep-linking">Deep linking</a>)</li>
+<li><strong>/help</strong> - returns a help message. It can be a short text about what your bot can do and a list of commands.</li>
+<li><strong>/settings</strong> - (if applicable) returns the bot&#39;s settings for this user and suggests commands to edit these settings.</li>
+</ul>
+<p>Users will see a <strong>Start</strong> button when they first open a conversation with your bot. <strong>Help</strong> and <strong>Settings</strong> links will be available in the menu on the bot&#39;s profile page.</p>
+<center><div>
+    <a href="/file/811140979/2/yD8AphHbahk/7662d14f4e0442ae3a" target="_blank"><img src="/file/811140979/2/yD8AphHbahk/7662d14f4e0442ae3a" title="An empty conversation with a bot" style="width: 250px; padding: 10px 5px" /></a>
+
+    <a href="/file/811140479/2/1c2zUWhR7sA/98889b2a45f8e42a35" target="_blank"><img src="/file/811140479/2/1c2zUWhR7sA/98889b2a45f8e42a35" title="A bot's profile page, featuring 'Help' and 'Settings' buttons" style="width: 250px; padding: 10px 5px" /></a><br>
+</div></center>
+
+<h4><a class="anchor" name="privacy-mode" href="#privacy-mode"><i class="anchor-icon"></i></a>Privacy mode</h4>
+<p>Bots are frequently added to groups in order to augment communication between human users, e.g. by providing news, notifications from external services or additional search functionality. This is especially true for work-related groups. Now, when you share a group with a bot, you tend to ask yourself “How can I be sure that the little rascal isn&#39;t selling my chat history to my competitors?” The answer is — <strong>privacy mode</strong>.</p>
+<p>A bot running in privacy mode will not receive all messages that people send to the group. Instead, it will only receive:</p>
+<ul>
+<li>All messages that start with a slash ‘/’ (see <a href="#commands">Commands</a> above)</li>
+<li>Messages that @mention the bot by username</li>
+<li>Replies to the bot&#39;s own messages</li>
+<li>Service messages (people added or removed from the group, etc.)</li>
+</ul>
+<p>On one hand, this helps some of us sleep better at night (in our tinfoil nightcaps), on the other — it allows the bot developer to save a lot of resources, since they won&#39;t need to process tens of thousands irrelevant messages each day.</p>
+<p>Privacy mode is enabled by default for all bots. It can be disabled, so that the bot will begin receiving all messages like an ordinary user. We only recommend doing this in cases where it is absolutely necessary for your bot to work — users can always see a bot&#39;s current privacy setting in the group members list. In most cases, using the <a href="/bots/api#forcereply">force reply</a> option for the bot&#39;s messages should be more than enough. </p>
+<h4><a class="anchor" name="deep-linking" href="#deep-linking"><i class="anchor-icon"></i></a>Deep linking</h4>
+<p>Telegram bots have a <a href="https://en.wikipedia.org/wiki/Deep_linking">deep linking</a> mechanism, that allows for passing additional parameters to the bot on startup. It could be a command that launches the bot — or an auth token to connect the user&#39;s Telegram account to their account on some external service.</p>
+<p>Each bot has a link that opens a conversation with it in Telegram — <code>https://telegram.me/&lt;bot username&gt;</code>. You can add the parameters <strong>start</strong> or <strong>startgroup</strong> to this link, with values up to 64 characters long. For example:</p>
+<pre><code>https://telegram.me/triviabot?startgroup=test</code></pre>
+<p><code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>_</code> and <code>-</code> are allowed. We recommend using <a href="https://en.wikipedia.org/wiki/Base64#URL_applications">base64url</a> to encode parameters with binary and other types of content.</p>
+<p>Following a link with the <strong>start</strong> parameter will open a one-on-one conversation with the bot, showing a START button in the place of the input field. If the <strong>startgroup</strong> parameter is used, the user will be prompted to select a group to add the bot to. As soon as a user confirms the action (presses the START button in their app or selects a group to add the bot to), your bot will receive a message from that user in this format:</p>
+<pre><code>/start PAYLOAD</code></pre>
+<p><code>PAYLOAD</code> stands for the value of the <strong>start</strong> or <strong>startgroup</strong> parameter that was passed in the link.</p>
+<h5><a class="anchor" name="deep-linking-example" href="#deep-linking-example"><i class="anchor-icon"></i></a>Deep-linking Example</h5>
+<p>Suppose the website example.com would like to send notifications to its users via a Telegram bot. Here&#39;s what they could do to enable notifications for a user with the ID <code>123</code>.</p>
+<ol>
+<li><a href="#botfather">Create a bot</a> with a suitable username, e.g. @ExampleComBot</li>
+<li>Set up a <a href="/bots/api#setwebhook">webhook</a> for incoming messages</li>
+<li>Generate a random string of a sufficient length, e.g. <code>$memcache_key = &quot;vCH1vGWJxfSeofSAs0K5PA&quot;</code></li>
+<li>Put the value <code>123</code> with the key <code>$memcache_key</code> into Memcache for 3600 seconds (one hour) </li>
+<li>Show our user the button <code>https://telegram.me/ExampleComBot?start=vCH1vGWJxfSeofSAs0K5PA</code></li>
+<li>Configure the webhook processor to query Memcached with the parameter that is passed in incoming messages beginning with <code>/start</code>. If the key exists, record the chat_id passed to the webhook as <strong>telegram_chat_id</strong> for the user <code>123</code>. Remove the key from Memcache.</li>
+<li>Now when we want to send a notification to the user <code>123</code>, check if they have the field <strong>telegram_chat_id</strong>. If yes, use the <a href="/bots/api#sendmessage">sendMessage</a> method in the <a href="/bots/api">Bot API</a> to send them a message in Telegram.</li>
+</ol>
+<hr>
+<h3><a class="anchor" name="botfather" href="#botfather"><i class="anchor-icon"></i></a>BotFather</h3>
+<blockquote>
+<p>Jump to top to learn everything about <a href="#">Telegram bots »</a></p>
+</blockquote>
+<p><a href="https://telegram.me/botfather">BotFather</a> is the one bot to rule them all. It will help you create new bots and change settings for existing ones.</p>
+<h4><a class="anchor" name="create-a-new-bot" href="#create-a-new-bot"><i class="anchor-icon"></i></a>Create a new bot</h4>
+<p>Use the <strong>/newbot</strong> command to create a new bot. The BotFather will ask you for a name and username, then generate an authorization token for your new bot. </p>
+<p>The <strong>name</strong> of your bot will be displayed in contact details and elsewhere.</p>
+<p>The <strong>Username</strong> is a short name, to be used in mentions and telegram.me links. Usernames are 5-32 characters long and are case insensitive, but may only include Latin characters, numbers, and underscores. Your bot&#39;s username <strong>must</strong> end in ‘bot’, e.g. ‘tetris_bot’ or ‘TetrisBot’.</p>
+<p>The <strong>token</strong> is a string along the lines of <code>110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw</code> that will be required to authorize the bot and send requests to the <a href="/bots/api">Bot API</a>.</p>
+<h4><a class="anchor" name="generate-an-authorization-token-for-your-bot" href="#generate-an-authorization-token-for-your-bot"><i class="anchor-icon"></i></a>Generate an authorization token for your bot</h4>
+<p>If your existing token is compromised or you lost it for some reason, use the <strong>/token</strong> command to generate a new one.</p>
+<h4><a class="anchor" name="edit-settings" href="#edit-settings"><i class="anchor-icon"></i></a>Edit settings</h4>
+<p>The remaining commands are pretty self-explanatory:</p>
+<ul>
+<li><strong>/setname</strong> – change your bot&#39;s name.</li>
+<li><strong>/setdescription</strong> — changes the bot&#39;s <strong>description</strong>, a short text of up to 512 characters, describing your bot. Users will see this text at the beginning of the conversation with the bot, titled ‘What can this bot do?’.</li>
+<li><strong>/setabouttext</strong> — changes the bot&#39;s <strong>about info</strong>, an even shorter text of up to 120 characters. Users will see this text on the bot&#39;s profile page. When they share your bot with someone, this text will be sent together with the link.</li>
+<li><strong>/setuserpic</strong> — changes the bot‘s profile pictures. It’s always nice to put a face to a name.</li>
+<li><strong>/setcommands</strong> — changes the list of commands supported by your bot.  Each command has a name (must start with a slash ‘/’, alphanumeric plus underscores, no more than 32 characters, case-insensitive), parameters, and a text description. Users will see the list of commands whenever they type ‘/’ in a conversation with your bot.</li>
+<li><strong>/setjoingroups</strong> — determines whether your bot can be added to groups or not. Any bot must be able to process private messages, but if your bot was not designed to work in groups, you can disable this.</li>
+<li><strong>/setprivacy</strong> — determines which messages your bot will receive when added to a group. With privacy mode disabled, the bot will receive all messages. We recommend leaving <a href="#privacy-mode">privacy mode</a> enabled.</li>
+<li><strong>/deletebot</strong> — deletes your bot and frees its username.</li>
+</ul>
+<blockquote>
+<p>Please note, that it may take <strong>a few minutes</strong> for changes to take effect.</p>
+</blockquote>
+</div>
+  
+</div>
+          
+        </div>
+      </div>
+      <div class="footer_wrap">
+  <div class="footer_columns_wrap clearfix footer_desktop">
+    <div class="footer_column footer_column_telegram">
+      <h5>Telegram</h5>
+      <div class="footer_telegram_description"></div>
+      Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.
+    </div>
+
+    <div class="footer_column">
+      <h5><a href="//telegram.org/faq">About</a></h5>
+      <ul>
+        <li><a href="//telegram.org/faq">FAQ</a></li>
+        <li><a href="//telegram.org/blog">Blog</a></li>
+        <li><a href="//telegram.org/press">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer_column">
+      <h5><a href="//telegram.org/apps#mobile-apps">Mobile Apps</a></h5>
+      <ul>
+        <li><a href="//telegram.org/dl/ios">iPhone/iPad</a></li>
+        <li><a href="//telegram.org/dl/android">Android</a></li>
+        <li><a href="//telegram.org/dl/wp">Windows Phone</a></li>
+      </ul>
+    </div>
+    <div class="footer_column">
+      <h5><a href="//telegram.org/apps#desktop-apps">Desktop Apps</a></h5>
+      <ul>
+        <li><a href="//telegram.org/dl/tdesktop">PC/Mac/Linux</a></li>
+        <li><a href="//telegram.org/dl/osx">Mac OS</a></li>
+        <li><a href="//telegram.org/dl/web">Web-browser</a></li>
+      </ul>
+    </div>
+    <div class="footer_column footer_column_platform">
+      <h5><a href="/">Platform</a></h5>
+      <ul>
+        <li><a href="/api">API</a></li>
+        <li><a href="/mtproto">Protocol</a></li>
+        <li><a href="/schema">Schema</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer_columns_wrap clearfix footer_mobile">
+    <div class="footer_column">
+      <h5><a href="//telegram.org/faq">About</a></h5>
+    </div>
+    <div class="footer_column">
+      <h5><a href="//telegram.org/blog">Blog</a></h5>
+    </div>
+    <div class="footer_column">
+      <h5><a href="//telegram.org/apps">Apps</a></h5>
+    </div>
+    <div class="footer_column">
+      <h5><a href="/">Platform</a></h5>
+    </div>
+    <div class="footer_column">
+      <h5><a href="https://twitter.com/telegram" target="_blank" data-track="Follow/Twitter" onclick="trackDlClick(this, event)">Twitter</a></h5>
+    </div>
+  </div>
+</div>
+    </div>
+    <script src="/js/main.js?13"></script>
+    
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-45099287-1', 'telegram.org');
+ga('send', 'pageview');backToTopInit();
+</script>
+  </body>
+</html>
+<!-- page generated in 2.39ms -->
