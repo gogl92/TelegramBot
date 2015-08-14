@@ -7,7 +7,18 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
-    
+     'urlManager' => [
+        'class' => 'yii\web\UrlManager',
+        // Disable index.php
+        'showScriptName' => false,
+        // Disable r= routes
+        'enablePrettyUrl' => true,
+        'rules' => array(
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+        ),
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KJdeTDG5oxO4MHnLZLkdttwL1nXXpFy9',

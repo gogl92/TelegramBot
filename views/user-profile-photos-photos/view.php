@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UserProfilePhotos_photos */
+/* @var $model app\models\UserProfilePhotosPhotos */
 
 $this->title = $model->idUserProfilePhotos;
 $this->params['breadcrumbs'][] = ['label' => 'User Profile Photos Photos', 'url' => ['index']];

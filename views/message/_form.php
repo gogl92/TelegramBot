@@ -12,7 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'from')->textInput() ?>
+    <?= $form->field($model, 'id_message')->textInput() ?>
+
+    <?= $form->field($model, 'message_id')->textInput() ?>
+
+    <?= $form->field($model, 'from_user')->textInput() ?>
 
     <?= $form->field($model, 'date')->textInput() ?>
 
@@ -35,6 +39,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sticker')->textInput() ?>
 
     <?= $form->field($model, 'video')->textInput() ?>
+
+    <?= $form->field($model, 'caption')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'contact')->textInput() ?>
 

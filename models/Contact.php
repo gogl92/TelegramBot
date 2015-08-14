@@ -11,7 +11,7 @@ use Yii;
  * @property string $phone_number
  * @property string $first_name
  * @property string $last_name
- * @property string $user_id
+ * @property integer $user_id
  */
 class Contact extends \yii\db\ActiveRecord
 {
@@ -30,7 +30,8 @@ class Contact extends \yii\db\ActiveRecord
     {
         return [
             [['phone_number', 'first_name'], 'required'],
-            [['phone_number', 'first_name', 'last_name', 'user_id'], 'string', 'max' => 100]
+            [['user_id'], 'integer'],
+            [['phone_number', 'first_name', 'last_name'], 'string', 'max' => 100]
         ];
     }
 

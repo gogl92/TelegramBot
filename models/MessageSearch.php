@@ -18,8 +18,8 @@ class MessageSearch extends Message
     public function rules()
     {
         return [
-            [['message_id', 'from', 'date', 'chat', 'forward_from', 'forward_date', 'reply_to_message', 'audio', 'photo', 'sticker', 'video', 'contact', 'location', 'new_chat_participant', 'left_chat_participant', 'new_chat_photo', 'delete_chat_photo', 'group_chat_created'], 'integer'],
-            [['text', 'document', 'new_chat_title'], 'safe'],
+            [['id_message', 'message_id', 'from_user', 'date', 'chat', 'forward_from', 'forward_date', 'reply_to_message', 'audio', 'photo', 'sticker', 'video', 'contact', 'location', 'new_chat_participant', 'left_chat_participant', 'new_chat_photo', 'delete_chat_photo', 'group_chat_created'], 'integer'],
+            [['text', 'document', 'caption', 'new_chat_title'], 'safe'],
         ];
     }
 
@@ -56,8 +56,9 @@ class MessageSearch extends Message
         }
 
         $query->andFilterWhere([
+            'id_message' => $this->id_message,
             'message_id' => $this->message_id,
-            'from' => $this->from,
+            'from_user' => $this->from_user,
             'date' => $this->date,
             'chat' => $this->chat,
             'forward_from' => $this->forward_from,
@@ -78,6 +79,7 @@ class MessageSearch extends Message
 
         $query->andFilterWhere(['like', 'text', $this->text])
             ->andFilterWhere(['like', 'document', $this->document])
+            ->andFilterWhere(['like', 'caption', $this->caption])
             ->andFilterWhere(['like', 'new_chat_title', $this->new_chat_title]);
 
         return $dataProvider;

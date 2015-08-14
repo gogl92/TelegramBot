@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\Message;
 use app\models\MessageSearch;
-use app\models\Telegram_bot;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,7 +14,6 @@ use yii\filters\VerbFilter;
  */
 class MessageController extends Controller
 {
-     public $enableCsrfValidation = false; 
     public function behaviors()
     {
         return [
@@ -65,27 +63,12 @@ class MessageController extends Controller
         $model = new Message();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->message_id]);
+            return $this->redirect(['view', 'id' => $model->id_message]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
-    }
-
-        /**
-     * Creates a new Message model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionGettering()
-    {
-        $request = Yii::$app->request;
-        $message = $request->post(); 
-        file_put_contents('queries', print_r($message, true));
-        /*$body = @file_get_contents('php://input');
-        $message = json_decode($body);
-        file_put_contents('queries', print_r($message, true));*/
     }
 
     /**
@@ -99,7 +82,7 @@ class MessageController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->message_id]);
+            return $this->redirect(['view', 'id' => $model->id_message]);
         } else {
             return $this->render('update', [
                 'model' => $model,

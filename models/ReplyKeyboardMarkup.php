@@ -15,6 +15,27 @@ use Yii;
  */
 class ReplyKeyboardMarkup extends \yii\db\ActiveRecord
 {
+    private $keyboard;
+    private $resize_keyboard;
+    private $one_time_keyboard;
+    private $selective;
+
+    public function __construct($resize_keyboard=FALSE, $one_time_keyboard = FALSE, $selective=FALSE){
+        $this->keyboard=array();
+        $this->keyboard[0]=array();
+        $this->resize_keyboard=$resize_keyboard;
+        $this->one_time_keyboard=$one_time_keyboard;
+        $this->selective=$selective;
+    }
+    public function add_option($option){
+        $this->keyboard = $option;
+    }
+
+    public function getKeyBoard(){
+        //$myObject = new ReplyKeyboardMarkup();
+        return $this;
+    }
+
     /**
      * @inheritdoc
      */
@@ -50,4 +71,6 @@ class ReplyKeyboardMarkup extends \yii\db\ActiveRecord
 Example: A user requests to change the bot‘s language, bot replies to the request with a keyboard to select the new language. Other users in the group don’t see the keyboard.',
         ];
     }
+
+
 }

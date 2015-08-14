@@ -15,9 +15,8 @@ use Yii;
  * @property integer $thumb
  * @property string $mime_type
  * @property integer $file_size
- * @property string $caption
  */
-class video extends \yii\db\ActiveRecord
+class Video extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -33,10 +32,10 @@ class video extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_id', 'width', 'height', 'duration', 'thumb'], 'required'],
+            [['file_id', 'width', 'height', 'duration'], 'required'],
             [['width', 'height', 'duration', 'thumb', 'file_size'], 'integer'],
             [['file_id'], 'string', 'max' => 45],
-            [['mime_type', 'caption'], 'string', 'max' => 100]
+            [['mime_type'], 'string', 'max' => 100]
         ];
     }
 
@@ -54,7 +53,6 @@ class video extends \yii\db\ActiveRecord
             'thumb' => 'Video thumbnail',
             'mime_type' => 'Optional. Mime type of a file as defined by sender',
             'file_size' => 'Optional. File size',
-            'caption' => 'Optional. Text description of the video (usually empty)',
         ];
     }
 }

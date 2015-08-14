@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UserProfilePhotos_photos */
+/* @var $model app\models\UserProfilePhotosPhotos */
 
 $this->title = 'Update User Profile Photos Photos: ' . ' ' . $model->idUserProfilePhotos;
 $this->params['breadcrumbs'][] = ['label' => 'User Profile Photos Photos', 'url' => ['index']];

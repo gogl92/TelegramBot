@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\TelegramBot;
+use app\models\ReplyKeyboardMarkup;
 
 class SiteController extends Controller
 {
@@ -50,6 +52,15 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+        public function actionBot()
+    {
+        $bot = new TelegramBot("107625524:AAECNEKwz9Gt8q9R-U3VQpGv9G6Rj6sIrpQ");
+        $keyboard = new ReplyKeyboardMarkup(TRUE, TRUE);
+            return $this->render('telegram', [
+                'bot' => $bot, 'keyboard' => $keyboard,
+            ]);
     }
 
     public function actionLogin()

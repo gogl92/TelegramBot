@@ -30,7 +30,7 @@ class Document extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_id', 'thumb'], 'required'],
+            [['file_id'], 'required'],
             [['thumb', 'file_size'], 'integer'],
             [['file_name', 'mime_type'], 'string'],
             [['file_id'], 'string', 'max' => 45]

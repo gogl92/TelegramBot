@@ -25,11 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'id_message',
             'message_id',
-            'from',
+            'from_user',
             'date',
             'chat',
-            'forward_from',
+            // 'forward_from',
             // 'forward_date',
             // 'reply_to_message',
             // 'text:ntext',
@@ -38,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'photo',
             // 'sticker',
             // 'video',
+            // 'caption',
             // 'contact',
             // 'location',
             // 'new_chat_participant',

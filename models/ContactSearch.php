@@ -18,8 +18,8 @@ class ContactSearch extends Contact
     public function rules()
     {
         return [
-            [['idContact'], 'integer'],
-            [['phone_number', 'first_name', 'last_name', 'user_id'], 'safe'],
+            [['idContact', 'user_id'], 'integer'],
+            [['phone_number', 'first_name', 'last_name'], 'safe'],
         ];
     }
 
@@ -57,12 +57,12 @@ class ContactSearch extends Contact
 
         $query->andFilterWhere([
             'idContact' => $this->idContact,
+            'user_id' => $this->user_id,
         ]);
 
         $query->andFilterWhere(['like', 'phone_number', $this->phone_number])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name])
-            ->andFilterWhere(['like', 'user_id', $this->user_id]);
+            ->andFilterWhere(['like', 'last_name', $this->last_name]);
 
         return $dataProvider;
     }

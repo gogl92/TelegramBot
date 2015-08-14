@@ -15,20 +15,19 @@ Alcances:
 5. Posibilidad de enviar mensajes en un momento determinado de tiempo, los mensajes serán leidos desde la base de datos.
 6. Descripción de Forms:
 
-Form de reglas simples (simple rules) siguiente:
+Form de reglas simples (text_rules) siguiente:
 command ---> List of commands, populated from the command list. ->List
 Recieved message-> ________________ There will appear a suggest list from the table recieved___messages. ->TextBox with suggestions.
 Tipo -------> Equals different containts < > >= <= between (Fileds text popup).
 Action ------> Send message (Text field pops up), Send file (File fild pops up) -> List with actions
 id_next_rule ---> list with none for default.
-Reglas para mensajes de texto.
+//Reglas para mensajes de texto. next project
 
 Form de reglas complejas(Complex rules):
 File(List will appear: File,Audio, Image, Video, Sticker Location AND Max );
 Action ------> Send message (Text field pops up), Send file (File fild pops up) -> List with actions
 id_next_rule ---> list with none for default.
 Reglas para archivos.
-
 
 Form de apis:
 Api name:

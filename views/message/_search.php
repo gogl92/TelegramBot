@@ -15,15 +15,17 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'id_message') ?>
+
     <?= $form->field($model, 'message_id') ?>
 
-    <?= $form->field($model, 'from') ?>
+    <?= $form->field($model, 'from_user') ?>
 
     <?= $form->field($model, 'date') ?>
 
     <?= $form->field($model, 'chat') ?>
 
-    <?= $form->field($model, 'forward_from') ?>
+    <?php // echo $form->field($model, 'forward_from') ?>
 
     <?php // echo $form->field($model, 'forward_date') ?>
 
@@ -40,6 +42,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sticker') ?>
 
     <?php // echo $form->field($model, 'video') ?>
+
+    <?php // echo $form->field($model, 'caption') ?>
 
     <?php // echo $form->field($model, 'contact') ?>
 
