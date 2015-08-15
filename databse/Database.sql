@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Aug 08, 2015 at 04:21 AM
+-- Generation Time: Aug 15, 2015 at 02:30 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -68,19 +68,6 @@ CREATE TABLE `Bot` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bot_audio`
---
-
-CREATE TABLE `bot_audio` (
-  `id_BotAudio` int(11) NOT NULL,
-  `id_Bot` int(11) NOT NULL COMMENT 'The id of the bot',
-  `id_Audio` int(11) NOT NULL COMMENT 'The id of the audio',
-  `inorout` tinyint(1) NOT NULL COMMENT 'One means in(received file), zero means out(Sent file)'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This table relates the Audio file with the bot that send it or receive it..';
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `command`
 --
 
@@ -130,6 +117,19 @@ CREATE TABLE `Document` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `file_rules`
+--
+
+CREATE TABLE `file_rules` (
+  `id_file_rules` int(11) NOT NULL,
+  `id_file` int(11) NOT NULL COMMENT 'List will appear: File,Audio, Image, Video, Sticker Location AND Max ',
+  `id_action` int(11) NOT NULL COMMENT 'Send message (Text field pops up), Send file (File fild pops up) -> List with actions',
+  `id_next_rule` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Rules that will be executed when the bot receives a file.';
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `force_reply`
 --
 
@@ -169,28 +169,29 @@ CREATE TABLE `Location` (
 --
 
 CREATE TABLE `Message` (
+  `id_message` int(11) NOT NULL,
   `message_id` int(11) NOT NULL COMMENT 'Unique message identifier',
-  `from` int(11) NOT NULL,
+  `from_user` int(11) NOT NULL COMMENT 'Sender',
   `date` int(11) NOT NULL COMMENT 'Date the message was sent in Unix time',
   `chat` int(11) NOT NULL COMMENT 'User or GroupChat\nConversation the message belongs to — user in case of a private message, GroupChat in case of a group',
-  `forward_from` int(11) NOT NULL,
-  `forward_date` int(11) NOT NULL,
-  `reply_to_message` int(11) NOT NULL,
-  `text` text,
-  `audio` int(11) DEFAULT NULL,
-  `document` text,
-  `photo` int(11) DEFAULT NULL,
-  `sticker` int(11) DEFAULT NULL,
-  `video` int(11) DEFAULT NULL,
-  `caption` varchar(250) DEFAULT NULL,
-  `contact` int(11) DEFAULT NULL,
-  `location` int(11) DEFAULT NULL,
-  `new_chat_participant` int(11) DEFAULT NULL,
-  `left_chat_participant` int(11) DEFAULT NULL,
-  `new_chat_title` text,
-  `new_chat_photo` int(11) DEFAULT NULL,
-  `delete_chat_photo` tinyint(1) DEFAULT NULL,
-  `group_chat_created` tinyint(1) DEFAULT NULL
+  `forward_from` int(11) NOT NULL COMMENT 'Optional. For forwarded messages, sender of the original message',
+  `forward_date` int(11) NOT NULL COMMENT 'Optional. For forwarded messages, date the original message was sent in Unix time',
+  `reply_to_message` int(11) NOT NULL COMMENT 'Optional. For replies, the original message. Note that the Message object in this field will not contain further reply_to_message fields even if it itself is a reply.',
+  `text` text COMMENT 'Optional. For text messages, the actual UTF-8 text of the message.',
+  `audio` int(11) DEFAULT NULL COMMENT 'Optional. Message is an audio file, information about the file.',
+  `document` text COMMENT 'Optional. Message is a general file, information about the file',
+  `photo` int(11) DEFAULT NULL COMMENT 'Optional. Message is a photo, available sizes of the photo',
+  `sticker` int(11) DEFAULT NULL COMMENT 'Optional. Message is a sticker, information about the sticker',
+  `video` int(11) DEFAULT NULL COMMENT 'Optional. Message is a video, information about the video',
+  `caption` varchar(250) DEFAULT NULL COMMENT 'Optional. Caption for the photo or video',
+  `contact` int(11) DEFAULT NULL COMMENT 'Optional. Message is a shared contact, information about the contact',
+  `location` int(11) DEFAULT NULL COMMENT 'Optional. Message is a shared location, information about the location',
+  `new_chat_participant` int(11) DEFAULT NULL COMMENT 'Optional. A new member was added to the group, information about them (this member may be bot itself)',
+  `left_chat_participant` int(11) DEFAULT NULL COMMENT 'Optional. A member was removed from the group, information about them (this member may be bot itself)',
+  `new_chat_title` text COMMENT 'Optional. A group title was changed to this value',
+  `new_chat_photo` int(11) DEFAULT NULL COMMENT 'Optional. A group photo was change to this value',
+  `delete_chat_photo` tinyint(1) DEFAULT NULL COMMENT 'Optional. Informs that the group photo was deleted',
+  `group_chat_created` tinyint(1) DEFAULT NULL COMMENT 'Optional. Informs that the group has been created'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -233,6 +234,13 @@ CREATE TABLE `ReplyKeyboardMarkup` (
   `selective` tinyint(1) DEFAULT NULL COMMENT 'Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot''s message is a reply (has reply_to_message_id), sender of the original message.\n\nExample: A user requests to change the bot‘s language, bot replies to the request with a keyboard to select the new language. Other users in the group don’t see the keyboard.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ReplyKeyboardMarkup`
+--
+
+INSERT INTO `ReplyKeyboardMarkup` (`idReplyKeyboardMarkup`, `keyboard`, `resize_keyboard`, `one_time_keyboard`, `selective`) VALUES
+(0, NULL, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -260,6 +268,33 @@ CREATE TABLE `Telegram_Application` (
   `key_application` varchar(100) NOT NULL,
   `hash_application` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='To be registered as a new api.';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `telegram_user`
+--
+
+CREATE TABLE `telegram_user` (
+  `id_telegram_user` int(11) NOT NULL,
+  `country_code` varchar(10) NOT NULL,
+  `cellphone` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Allows to login and also to login into telegram to create bots etc.';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `text_rules`
+--
+
+CREATE TABLE `text_rules` (
+  `id_text_rule` int(11) NOT NULL,
+  `command` int(11) NOT NULL COMMENT 'List of commands, populated from the command table.',
+  `recieved_message` int(11) NOT NULL COMMENT 'The message from the table.',
+  `type` varchar(50) NOT NULL COMMENT 'Equals different containts < > >= <= between (Fileds text popup).',
+  `action` int(11) NOT NULL COMMENT 'Send message (Text field pops up), Send file (File fild pops up).',
+  `id_next_rule` int(11) DEFAULT NULL COMMENT 'id of the next rule, could be empty.'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -313,18 +348,6 @@ CREATE TABLE `video` (
   `file_size` int(11) DEFAULT NULL COMMENT 'Optional. File size'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `yii_user`
---
-
-CREATE TABLE `yii_user` (
-  `id_yii_user` int(11) NOT NULL,
-  `country_code` varchar(10) NOT NULL,
-  `cellphone` varchar(35) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Allows to login and also to login into telegram to create bots etc.';
-
 --
 -- Indexes for dumped tables
 --
@@ -348,12 +371,6 @@ ALTER TABLE `Bot`
   ADD PRIMARY KEY (`id_bot`);
 
 --
--- Indexes for table `bot_audio`
---
-ALTER TABLE `bot_audio`
-  ADD PRIMARY KEY (`id_BotAudio`);
-
---
 -- Indexes for table `command`
 --
 ALTER TABLE `command`
@@ -370,6 +387,12 @@ ALTER TABLE `Contact`
 --
 ALTER TABLE `Document`
   ADD PRIMARY KEY (`idDocument`);
+
+--
+-- Indexes for table `file_rules`
+--
+ALTER TABLE `file_rules`
+  ADD PRIMARY KEY (`id_file_rules`);
 
 --
 -- Indexes for table `force_reply`
@@ -393,7 +416,7 @@ ALTER TABLE `Location`
 -- Indexes for table `Message`
 --
 ALTER TABLE `Message`
-  ADD PRIMARY KEY (`message_id`);
+  ADD PRIMARY KEY (`id_message`);
 
 --
 -- Indexes for table `PhotoSize`
@@ -424,6 +447,18 @@ ALTER TABLE `Sticker`
 --
 ALTER TABLE `Telegram_Application`
   ADD PRIMARY KEY (`id_application`);
+
+--
+-- Indexes for table `telegram_user`
+--
+ALTER TABLE `telegram_user`
+  ADD PRIMARY KEY (`id_telegram_user`);
+
+--
+-- Indexes for table `text_rules`
+--
+ALTER TABLE `text_rules`
+  ADD PRIMARY KEY (`id_text_rule`);
 
 --
 -- Indexes for table `user`
@@ -466,11 +501,6 @@ ALTER TABLE `Audio`
 ALTER TABLE `Bot`
   MODIFY `id_bot` int(11) NOT NULL AUTO_INCREMENT COMMENT 'unique id for the bot.';
 --
--- AUTO_INCREMENT for table `bot_audio`
---
-ALTER TABLE `bot_audio`
-  MODIFY `id_BotAudio` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `Contact`
 --
 ALTER TABLE `Contact`
@@ -480,6 +510,11 @@ ALTER TABLE `Contact`
 --
 ALTER TABLE `Document`
   MODIFY `idDocument` int(11) NOT NULL AUTO_INCREMENT COMMENT 'This object represents a general file (as opposed to photos and audio files).';
+--
+-- AUTO_INCREMENT for table `file_rules`
+--
+ALTER TABLE `file_rules`
+  MODIFY `id_file_rules` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `force_reply`
 --
@@ -496,11 +531,6 @@ ALTER TABLE `GroupChat`
 ALTER TABLE `Location`
   MODIFY `idLocation` int(11) NOT NULL AUTO_INCREMENT COMMENT 'This object represents a point on the map.';
 --
--- AUTO_INCREMENT for table `Message`
---
-ALTER TABLE `Message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique message identifier';
---
 -- AUTO_INCREMENT for table `PhotoSize`
 --
 ALTER TABLE `PhotoSize`
@@ -515,6 +545,11 @@ ALTER TABLE `Sticker`
 --
 ALTER TABLE `Telegram_Application`
   MODIFY `id_application` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `text_rules`
+--
+ALTER TABLE `text_rules`
+  MODIFY `id_text_rule` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
