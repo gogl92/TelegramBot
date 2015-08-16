@@ -50,12 +50,12 @@ class Bot extends \yii\db\ActiveRecord
         return [
             'id_bot' => 'unique id for the bot.',
             'name' => 'bot\'s name.',
-            'username' => 'It must end in *bot*. Example: TetrisBot or tetris_bot.',
+            'username' => 'Username. It must end in *bot*. Example: TetrisBot or tetris_bot.',
             'description' => 'bot\'s description, a short text of up to 512 characters',
             'about' => 'bot\'s about info, an even shorter text of up to 120 characters. Users will see this text on the bot\'s profile page. When they share your bot with someone, this text will be sent together with the link.',
             'bot_picture' => 'bot‘s profile pictures. It’s always nice to put a face to a name.',
-            'join_groups' => ' determines whether your bot can be added to groups or not. Any bot must be able to process private messages, but if your bot was not designed to work in groups, you can disable this.',
-            'privacy' => 'determines which messages your bot will receive when added to a group. With privacy mode disabled, the bot will receive all messages. We recommend leaving privacy mode enabled.',
+            'join_groups' => 'join groups? determines whether your bot can be added to groups or not. Any bot must be able to process private messages, but if your bot was not designed to work in groups, you can disable this.',
+            'privacy' => 'Privacy, determines which messages your bot will receive when added to a group. With privacy mode disabled, the bot will receive all messages. We recommend leaving privacy mode enabled.',
             'deletebot' => 'deletes your bot and frees its username.',
             'http_token' => 'Token given by the botfather to recieve and send messages.',
         ];

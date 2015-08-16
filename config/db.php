@@ -4,6 +4,6 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=TelegramBot',
     'username' => 'root',
-    'password' => 'Artisalie12',
+    'password' => '',
     'charset' => 'utf8',
 ];

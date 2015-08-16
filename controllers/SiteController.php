@@ -10,6 +10,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\TelegramBot;
 use app\models\ReplyKeyboardMarkup;
+use app\models\Bot;
 
 class SiteController extends Controller
 {
@@ -49,12 +50,34 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionStart()
+    {
+        return $this->render('start');
+    }
+	
+	public function actionStartup()
+    {
+    	$model = new Bot();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_bot]);
+        } else {
+            return $this->render('startup', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+	public function actionDevelopers()
+    {
+        return $this->render('developers');
+    }
+	
     public function actionIndex()
     {
         return $this->render('index');
     }
-
-        public function actionBot()
+       
+	    public function actionBot()
     {
         $bot = new TelegramBot("107625524:AAECNEKwz9Gt8q9R-U3VQpGv9G6Rj6sIrpQ");
         $keyboard = new ReplyKeyboardMarkup(TRUE, TRUE);

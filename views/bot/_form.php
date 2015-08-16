@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'about')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'about')->textArea(['rows' => '4', 'maxlength' => true])->label('Actualizacion de Estado'); ?>
 
     <?= $form->field($model, 'bot_picture')->textInput() ?>
 
