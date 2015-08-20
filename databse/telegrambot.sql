@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2015 at 08:24 AM
+-- Generation Time: Aug 20, 2015 at 07:08 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -55,7 +55,14 @@ CREATE TABLE IF NOT EXISTS `audio` (
   `id_user` int(11) NOT NULL,
   `file_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idAudio`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `audio`
+--
+
+INSERT INTO `audio` (`idAudio`, `file_id`, `duration`, `mime_type`, `file_size`, `id_user`, `file_name`) VALUES
+(1, '1', '1', '1', '1', 1, '');
 
 -- --------------------------------------------------------
 
@@ -146,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `file_rules` (
   `id_next_rule` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `action_name` varchar(255) NOT NULL,
+  `concat` text COMMENT 'The concatenation of rules, users, locations, size, etc.',
   PRIMARY KEY (`id_file_rules`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Rules that will be executed when the bot receives a file.' AUTO_INCREMENT=1 ;
 
@@ -358,6 +366,7 @@ CREATE TABLE IF NOT EXISTS `text_rules` (
   `id_next_rule` int(11) DEFAULT NULL COMMENT 'id of the next rule, could be empty.',
   `id_user` int(11) NOT NULL,
   `action_name` varchar(255) NOT NULL,
+  `concat` text COMMENT 'The concatenation of rules, users, date, etc.',
   PRIMARY KEY (`id_text_rule`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
