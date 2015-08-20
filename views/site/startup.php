@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 $this->title = 'Telegram Bot Studio';
@@ -67,18 +68,21 @@ $this->title = 'Telegram Bot Studio';
 	         <div class="col-lg-4">
 				<div class="audio-form">
 	
-				    <?php $form = ActiveForm::begin(); ?>
-								
-				    <?= $form->field($model, 'duration')->textInput(['maxlength' => true]) ?>
-				
-				    <?= $form->field($model, 'mime_type')->textInput(['maxlength' => true]) ?>
-				
-				    <?= $form->field($model, 'file_size')->textInput(['maxlength' => true]) ?>
-				
-				    <div class="form-group">
-				        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-				    </div>
-				
+			    <?php $form = ActiveForm::begin([
+			                    'options' => ['enctype' => 'multipart/form-data']
+			        ]); ?>
+			
+					<?php
+					// Usage with ActiveForm and model
+					echo $form->field($audio, 'file_name')->widget(FileInput::classname(), [
+					    'options' => ['accept' => 'audio/*'],
+					]);
+					
+					?>
+			    
+			        <div class="form-group">
+			            <?= Html::submitButton('Upload Audio', ['class' => 'btn btn-primary']) ?>
+			        </div>
 				    <?php ActiveForm::end(); ?>
 				
 					</div>

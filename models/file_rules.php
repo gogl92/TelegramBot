@@ -13,6 +13,7 @@ use Yii;
  * @property integer $id_next_rule
  * @property integer $id_user
  * @property string $action_name
+ * @property string $concat
  */
 class file_rules extends \yii\db\ActiveRecord
 {
@@ -32,6 +33,7 @@ class file_rules extends \yii\db\ActiveRecord
         return [
             [['id_file', 'id_action', 'id_next_rule', 'id_user', 'action_name'], 'required'],
             [['id_file', 'id_action', 'id_next_rule', 'id_user'], 'integer'],
+            [['concat'], 'string'],
             [['action_name'], 'string', 'max' => 255]
         ];
     }
@@ -48,6 +50,7 @@ class file_rules extends \yii\db\ActiveRecord
             'id_next_rule' => 'Id Next Rule',
             'id_user' => 'Id User',
             'action_name' => 'Action Name',
+            'concat' => 'The concatenation of rules, users, locations, size, etc.',
         ];
     }
 }

@@ -15,6 +15,7 @@ use Yii;
  * @property integer $id_next_rule
  * @property integer $id_user
  * @property string $action_name
+ * @property string $concat
  */
 class TextRules extends \yii\db\ActiveRecord
 {
@@ -34,6 +35,7 @@ class TextRules extends \yii\db\ActiveRecord
         return [
             [['command', 'recieved_message', 'type', 'action', 'id_user', 'action_name'], 'required'],
             [['command', 'recieved_message', 'action', 'id_next_rule', 'id_user'], 'integer'],
+            [['concat'], 'string'],
             [['type'], 'string', 'max' => 50],
             [['action_name'], 'string', 'max' => 255]
         ];
@@ -53,6 +55,7 @@ class TextRules extends \yii\db\ActiveRecord
             'id_next_rule' => 'id of the next rule, could be empty.',
             'id_user' => 'Id User',
             'action_name' => 'Action Name',
+            'concat' => 'The concatenation of rules, users, date, etc.',
         ];
     }
 }

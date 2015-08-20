@@ -13,6 +13,7 @@ use app\models\TelegramBot;
 use app\models\ReplyKeyboardMarkup;
 use app\models\Bot;
 use app\models\Command;
+use app\models\Audio;
 
 
 class SiteController extends Controller
@@ -66,11 +67,12 @@ class SiteController extends Controller
     {
     	$bot = new Bot();
 		$command = new Command();
+		$audio = new Audio();
         if ($bot->load(Yii::$app->request->post()) && $bot->save()) {
             return $this->redirect(['view', 'id' => $bot->id_bot]);
         } else {
             return $this->render('startup', [
-                'bot' => $bot, 'command' => $command,
+                'bot' => $bot, 'command' => $command, 'audio'=>$audio
             ]);
         }
     }
