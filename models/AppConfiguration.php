@@ -16,6 +16,7 @@ use Yii;
  * @property string $test_configuration
  * @property string $production_configuration
  * @property string $public_keys
+ * @property integer $id_user
  */
 class AppConfiguration extends \yii\db\ActiveRecord
 {
@@ -33,8 +34,8 @@ class AppConfiguration extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_app', 'api_id', 'api_hash', 'app_title', 'short_name', 'gcm_api_key', 'test_configuration', 'production_configuration', 'public_keys'], 'required'],
-            [['id_app', 'api_id'], 'integer'],
+            [['id_app', 'api_id', 'api_hash', 'app_title', 'short_name', 'gcm_api_key', 'test_configuration', 'production_configuration', 'public_keys', 'id_user'], 'required'],
+            [['id_app', 'api_id', 'id_user'], 'integer'],
             [['public_keys'], 'string'],
             [['api_hash', 'short_name', 'gcm_api_key'], 'string', 'max' => 100],
             [['app_title'], 'string', 'max' => 250],
@@ -57,6 +58,7 @@ class AppConfiguration extends \yii\db\ActiveRecord
             'test_configuration' => 'Test configuration:',
             'production_configuration' => 'Production configuration:',
             'public_keys' => 'Public keys:',
+            'id_user' => 'Id User',
         ];
     }
 }

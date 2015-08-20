@@ -17,28 +17,28 @@ $this->title = 'Telegram Bot Studio';
     <div class="body-content">
         <div class="row">
             <div class="col-lg-4">
-				<div class="bot-form">
+				<div class="bot-form; background-color:black;">
 				
 				        <?php $form = ActiveForm::begin(); ?>
 
-					    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+					    <?= $form->field($bot, 'name')->textInput(['maxlength' => true]) ?>
 					
-					    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+					    <?= $form->field($bot, 'username')->textInput(['maxlength' => true]) ?>
 					
-						<?= $form->field($model, 'http_token')->textInput(['maxlength' => true]) ?>
+						<?= $form->field($bot, 'http_token')->textInput(['maxlength' => true]) ?>
 					
-					    <?= $form->field($model, 'description')->textArea(['rows' => '10', 'maxlength' => true]); ?>
+					    <?= $form->field($bot, 'description')->textArea(['rows' => '10', 'maxlength' => true]); ?>
 					
-					    <?= $form->field($model, 'about')->textArea(['rows' => '4', 'maxlength' => true]); ?>
+					    <?= $form->field($bot, 'about')->textArea(['rows' => '4', 'maxlength' => true]); ?>
 					
-					    <?= $form->field($model, 'bot_picture')->textInput() ?>
+					    <?= $form->field($bot, 'bot_picture')->textInput() ?>
 					
-					    <?= $form->field($model, 'join_groups')->checkbox(); ?>
+					    <?= $form->field($bot, 'join_groups')->checkbox(['value' => true]); ?>
 					
-					    <?= $form->field($model, 'privacy')->checkbox(); ?>
+					    <?= $form->field($bot, 'privacy')->checkbox(array('default'=>true)); ?>
 										
 					    <div class="form-group">
-					        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+					        <?= Html::submitButton($bot->isNewRecord ? 'Create New Bot' : 'Update Bot', ['class' => $bot->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 					    </div>
 					
 					    <?php ActiveForm::end(); ?>
@@ -46,12 +46,44 @@ $this->title = 'Telegram Bot Studio';
 				</div>
             </div>
             <div class="col-lg-4">
+				<div class="command-form">
 
-            </div>
-         <div class="col-lg-4">
+			    <?php $form = ActiveForm::begin(); ?>
+			    
+			    <?= $form->field($command, 'command_name')->textInput(['maxlength' => true]) ?>
+			
+			    <?= $form->field($command, 'command_value')->textInput(['maxlength' => true]) ?>
+			
+			    <?= $form->field($command, 'argument')->textInput(['maxlength' => true]) ?>
+			
+			    <div class="form-group">
+			        <?= Html::submitButton($command->isNewRecord ? 'Create command' : 'Update command', ['class' => $command->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+			    </div>
+			
+			    <?php ActiveForm::end(); ?>
 
+			</div>
             </div>
-        </div>
+	         <div class="col-lg-4">
+				<div class="audio-form">
+	
+				    <?php $form = ActiveForm::begin(); ?>
+								
+				    <?= $form->field($model, 'duration')->textInput(['maxlength' => true]) ?>
+				
+				    <?= $form->field($model, 'mime_type')->textInput(['maxlength' => true]) ?>
+				
+				    <?= $form->field($model, 'file_size')->textInput(['maxlength' => true]) ?>
+				
+				    <div class="form-group">
+				        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+				    </div>
+				
+				    <?php ActiveForm::end(); ?>
+				
+					</div>
+	            </div>
+	        </div>
 
     </div>
 </div>

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\command */
+/* @var $model app\models\Command */
 
 $this->title = 'Create Command';
 $this->params['breadcrumbs'][] = ['label' => 'Commands', 'url' => ['index']];

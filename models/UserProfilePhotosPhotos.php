@@ -5,22 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "UserProfilePhotos_photos".
+ * This is the model class for table "userprofilephotos_photos".
  *
  * @property integer $idUserProfilePhotos
  * @property integer $PhotoSize_idPhotoSize
+ * @property integer $id_user
  *
- * @property PhotoSize $photoSizeIdPhotoSize
- * @property UserProfilePhotos $idUserProfilePhotos0
+ * @property Photosize $photoSizeIdPhotoSize
+ * @property Userprofilephotos $idUserProfilePhotos0
  */
-class UserProfilePhotosPhotos extends \yii\db\ActiveRecord
+class UserprofilephotosPhotos extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'UserProfilePhotos_photos';
+        return 'userprofilephotos_photos';
     }
 
     /**
@@ -29,8 +30,8 @@ class UserProfilePhotosPhotos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idUserProfilePhotos', 'PhotoSize_idPhotoSize'], 'required'],
-            [['idUserProfilePhotos', 'PhotoSize_idPhotoSize'], 'integer']
+            [['idUserProfilePhotos', 'PhotoSize_idPhotoSize', 'id_user'], 'required'],
+            [['idUserProfilePhotos', 'PhotoSize_idPhotoSize', 'id_user'], 'integer']
         ];
     }
 
@@ -42,6 +43,7 @@ class UserProfilePhotosPhotos extends \yii\db\ActiveRecord
         return [
             'idUserProfilePhotos' => 'Id User Profile Photos',
             'PhotoSize_idPhotoSize' => 'Photo Size Id Photo Size',
+            'id_user' => 'Id User',
         ];
     }
 
@@ -50,7 +52,7 @@ class UserProfilePhotosPhotos extends \yii\db\ActiveRecord
      */
     public function getPhotoSizeIdPhotoSize()
     {
-        return $this->hasOne(PhotoSize::className(), ['idPhotoSize' => 'PhotoSize_idPhotoSize']);
+        return $this->hasOne(Photosize::className(), ['idPhotoSize' => 'PhotoSize_idPhotoSize']);
     }
 
     /**
@@ -58,6 +60,6 @@ class UserProfilePhotosPhotos extends \yii\db\ActiveRecord
      */
     public function getIdUserProfilePhotos0()
     {
-        return $this->hasOne(UserProfilePhotos::className(), ['idUserProfilePhotos' => 'idUserProfilePhotos']);
+        return $this->hasOne(Userprofilephotos::className(), ['idUserProfilePhotos' => 'idUserProfilePhotos']);
     }
 }

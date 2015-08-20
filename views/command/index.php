@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\commandSearch */
+/* @var $searchModel app\models\CommandSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Commands';
@@ -25,16 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_bot',
-            'name',
-            'username',
-            'description',
-            'about',
-            // 'bot_picture',
-            // 'join_groups',
-            // 'privacy',
-            // 'deletebot',
-            // 'http_token',
+            'id_command',
+            'command_name',
+            'command_value',
+            'argument',
+            'id_user',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

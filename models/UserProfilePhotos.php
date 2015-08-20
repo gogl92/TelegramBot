@@ -5,22 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "UserProfilePhotos".
+ * This is the model class for table "userprofilephotos".
  *
  * @property integer $idUserProfilePhotos
  * @property integer $total_count
+ * @property integer $id_user
  *
- * @property UserProfilePhotosPhotos[] $userProfilePhotosPhotos
- * @property PhotoSize[] $photoSizeIdPhotoSizes
+ * @property UserprofilephotosPhotos[] $userprofilephotosPhotos
+ * @property Photosize[] $photoSizeIdPhotoSizes
  */
-class UserProfilePhotos extends \yii\db\ActiveRecord
+class Userprofilephotos extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'UserProfilePhotos';
+        return 'userprofilephotos';
     }
 
     /**
@@ -29,8 +30,8 @@ class UserProfilePhotos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['total_count'], 'required'],
-            [['total_count'], 'integer']
+            [['total_count', 'id_user'], 'required'],
+            [['total_count', 'id_user'], 'integer']
         ];
     }
 
@@ -42,15 +43,16 @@ class UserProfilePhotos extends \yii\db\ActiveRecord
         return [
             'idUserProfilePhotos' => 'This object represent a user\'s profile pictures.',
             'total_count' => 'Total number of profile pictures the target user has',
+            'id_user' => 'Id User',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserProfilePhotosPhotos()
+    public function getUserprofilephotosPhotos()
     {
-        return $this->hasMany(UserProfilePhotosPhotos::className(), ['idUserProfilePhotos' => 'idUserProfilePhotos']);
+        return $this->hasMany(UserprofilephotosPhotos::className(), ['idUserProfilePhotos' => 'idUserProfilePhotos']);
     }
 
     /**
@@ -58,6 +60,6 @@ class UserProfilePhotos extends \yii\db\ActiveRecord
      */
     public function getPhotoSizeIdPhotoSizes()
     {
-        return $this->hasMany(PhotoSize::className(), ['idPhotoSize' => 'PhotoSize_idPhotoSize'])->viaTable('UserProfilePhotos_photos', ['idUserProfilePhotos' => 'idUserProfilePhotos']);
+        return $this->hasMany(Photosize::className(), ['idPhotoSize' => 'PhotoSize_idPhotoSize'])->viaTable('userprofilephotos_photos', ['idUserProfilePhotos' => 'idUserProfilePhotos']);
     }
 }

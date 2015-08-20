@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\command;
-use app\models\commandSearch;
+use app\models\Command;
+use app\models\CommandSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CommandController implements the CRUD actions for command model.
+ * CommandController implements the CRUD actions for Command model.
  */
 class CommandController extends Controller
 {
@@ -27,12 +27,12 @@ class CommandController extends Controller
     }
 
     /**
-     * Lists all command models.
+     * Lists all Command models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new commandSearch();
+        $searchModel = new CommandSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class CommandController extends Controller
     }
 
     /**
-     * Displays a single command model.
+     * Displays a single Command model.
      * @param integer $id
      * @return mixed
      */
@@ -54,16 +54,16 @@ class CommandController extends Controller
     }
 
     /**
-     * Creates a new command model.
+     * Creates a new Command model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new command();
+        $model = new Command();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_bot]);
+            return $this->redirect(['view', 'id' => $model->id_command]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,7 +72,7 @@ class CommandController extends Controller
     }
 
     /**
-     * Updates an existing command model.
+     * Updates an existing Command model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -82,7 +82,7 @@ class CommandController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_bot]);
+            return $this->redirect(['view', 'id' => $model->id_command]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -91,7 +91,7 @@ class CommandController extends Controller
     }
 
     /**
-     * Deletes an existing command model.
+     * Deletes an existing Command model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class CommandController extends Controller
     }
 
     /**
-     * Finds the command model based on its primary key value.
+     * Finds the Command model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return command the loaded model
+     * @return Command the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = command::findOne($id)) !== null) {
+        if (($model = Command::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

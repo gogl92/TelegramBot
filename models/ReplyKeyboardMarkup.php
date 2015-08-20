@@ -5,43 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "ReplyKeyboardMarkup".
+ * This is the model class for table "replykeyboardmarkup".
  *
  * @property integer $idReplyKeyboardMarkup
  * @property string $keyboard
  * @property integer $resize_keyboard
  * @property integer $one_time_keyboard
  * @property integer $selective
+ * @property integer $id_user
+ * @property string $keyboard_name
  */
-class ReplyKeyboardMarkup extends \yii\db\ActiveRecord
+class ReplyKeyBoardMarkup extends \yii\db\ActiveRecord
 {
-    private $keyboard;
-    private $resize_keyboard;
-    private $one_time_keyboard;
-    private $selective;
-
-    public function __construct($resize_keyboard=FALSE, $one_time_keyboard = FALSE, $selective=FALSE){
-        $this->keyboard=array();
-        $this->keyboard[0]=array();
-        $this->resize_keyboard=$resize_keyboard;
-        $this->one_time_keyboard=$one_time_keyboard;
-        $this->selective=$selective;
-    }
-    public function add_option($option){
-        $this->keyboard = $option;
-    }
-
-    public function getKeyBoard(){
-        //$myObject = new ReplyKeyboardMarkup();
-        return $this;
-    }
-
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'ReplyKeyboardMarkup';
+        return 'replykeyboardmarkup';
     }
 
     /**
@@ -50,9 +31,10 @@ class ReplyKeyboardMarkup extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idReplyKeyboardMarkup'], 'required'],
-            [['idReplyKeyboardMarkup', 'resize_keyboard', 'one_time_keyboard', 'selective'], 'integer'],
-            [['keyboard'], 'string']
+            [['idReplyKeyboardMarkup', 'id_user', 'keyboard_name'], 'required'],
+            [['idReplyKeyboardMarkup', 'resize_keyboard', 'one_time_keyboard', 'selective', 'id_user'], 'integer'],
+            [['keyboard'], 'string'],
+            [['keyboard_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -69,8 +51,8 @@ class ReplyKeyboardMarkup extends \yii\db\ActiveRecord
             'selective' => 'Optional. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the text of the Message object; 2) if the bot\'s message is a reply (has reply_to_message_id), sender of the original message.
 
 Example: A user requests to change the bot‘s language, bot replies to the request with a keyboard to select the new language. Other users in the group don’t see the keyboard.',
+            'id_user' => 'Id User',
+            'keyboard_name' => 'Keyboard Name',
         ];
     }
-
-
 }

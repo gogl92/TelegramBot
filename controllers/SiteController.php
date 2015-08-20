@@ -6,11 +6,14 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\models\SignupForm;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\TelegramBot;
 use app\models\ReplyKeyboardMarkup;
 use app\models\Bot;
+use app\models\Command;
+
 
 class SiteController extends Controller
 {
@@ -49,35 +52,48 @@ class SiteController extends Controller
             ],
         ];
     }
-
+	/**
+	 * Designed to chose between the Dev site and the entreprenur site.
+	 */
     public function actionStart()
     {
         return $this->render('start');
     }
-	
+	/**
+	 * Function that renders a dashboard to controll evrything in the bot/app 
+	 */
 	public function actionStartup()
     {
-    	$model = new Bot();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_bot]);
+    	$bot = new Bot();
+		$command = new Command();
+        if ($bot->load(Yii::$app->request->post()) && $bot->save()) {
+            return $this->redirect(['view', 'id' => $bot->id_bot]);
         } else {
             return $this->render('startup', [
-                'model' => $model,
+                'bot' => $bot, 'command' => $command,
             ]);
         }
     }
-
+	/**
+	 * Function that renders the dashboard to CRUD the Apis-
+	 */
 	public function actionDevelopers()
     {
         return $this->render('developers');
     }
 	
+	/**
+	 * Main page.
+	 */
     public function actionIndex()
     {
         return $this->render('index');
     }
-       
-	    public function actionBot()
+    
+	/**
+	 * Just for testing
+	 */   
+	public function actionBot()
     {
         $bot = new TelegramBot("107625524:AAECNEKwz9Gt8q9R-U3VQpGv9G6Rj6sIrpQ");
         $keyboard = new ReplyKeyboardMarkup(TRUE, TRUE);
@@ -85,7 +101,29 @@ class SiteController extends Controller
                 'bot' => $bot, 'keyboard' => $keyboard,
             ]);
     }
+	
+	/**
+	 * New user, facebook, twitter, github integration NEEDED
+	 */
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
 
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+	
+	/**
+	 * Login page
+	 */
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -101,7 +139,10 @@ class SiteController extends Controller
             ]);
         }
     }
-
+	
+	/**
+	 * Log out, check to logout any data and delete the CLI info
+	 */
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -109,6 +150,9 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+	/**
+	 * Contact to the admin, is there any better way?
+	 */
     public function actionContact()
     {
         $model = new ContactForm();
@@ -122,7 +166,10 @@ class SiteController extends Controller
             ]);
         }
     }
-
+	
+	/**
+	 * More info, add videos etc. 
+	 */
     public function actionAbout()
     {
         return $this->render('about');

@@ -5,12 +5,13 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Telegram_Application".
+ * This is the model class for table "telegram_application".
  *
  * @property integer $id_application
  * @property string $name
  * @property string $key_application
  * @property string $hash_application
+ * @property integer $id_user
  */
 class TelegramApplication extends \yii\db\ActiveRecord
 {
@@ -19,7 +20,7 @@ class TelegramApplication extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Telegram_Application';
+        return 'telegram_application';
     }
 
     /**
@@ -28,7 +29,8 @@ class TelegramApplication extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'key_application', 'hash_application'], 'required'],
+            [['name', 'key_application', 'hash_application', 'id_user'], 'required'],
+            [['id_user'], 'integer'],
             [['name', 'key_application', 'hash_application'], 'string', 'max' => 100]
         ];
     }
@@ -43,6 +45,7 @@ class TelegramApplication extends \yii\db\ActiveRecord
             'name' => 'Name',
             'key_application' => 'Key Application',
             'hash_application' => 'Hash Application',
+            'id_user' => 'Id User',
         ];
     }
 }

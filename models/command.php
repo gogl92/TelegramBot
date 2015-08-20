@@ -5,27 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Bot".
+ * This is the model class for table "command".
  *
- * @property integer $id_bot
- * @property string $name
- * @property string $username
- * @property string $description
- * @property string $about
- * @property integer $bot_picture
- * @property integer $join_groups
- * @property integer $privacy
- * @property integer $deletebot
- * @property string $http_token
+ * @property integer $id_command
+ * @property string $command_name
+ * @property string $command_value
+ * @property string $argument
+ * @property integer $id_user
  */
-class command extends \yii\db\ActiveRecord
+class Command extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'Bot';
+        return 'command';
     }
 
     /**
@@ -34,11 +29,10 @@ class command extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'username', 'join_groups', 'privacy', 'deletebot'], 'required'],
-            [['bot_picture', 'join_groups', 'privacy', 'deletebot'], 'integer'],
-            [['name', 'username', 'http_token'], 'string', 'max' => 100],
-            [['description'], 'string', 'max' => 512],
-            [['about'], 'string', 'max' => 120]
+            [['id_command', 'command_name', 'command_value', 'argument', 'id_user'], 'required'],
+            [['id_command', 'id_user'], 'integer'],
+            [['command_name', 'argument'], 'string', 'max' => 100],
+            [['command_value'], 'string', 'max' => 50]
         ];
     }
 
@@ -48,16 +42,11 @@ class command extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_bot' => 'unique id for the bot.',
-            'name' => 'bot\'s name.',
-            'username' => 'It must end in *bot*. Example: TetrisBot or tetris_bot.',
-            'description' => 'bot\'s description, a short text of up to 512 characters',
-            'about' => 'bot\'s about info, an even shorter text of up to 120 characters. Users will see this text on the bot\'s profile page. When they share your bot with someone, this text will be sent together with the link.',
-            'bot_picture' => 'bot‘s profile pictures. It’s always nice to put a face to a name.',
-            'join_groups' => ' determines whether your bot can be added to groups or not. Any bot must be able to process private messages, but if your bot was not designed to work in groups, you can disable this.',
-            'privacy' => 'determines which messages your bot will receive when added to a group. With privacy mode disabled, the bot will receive all messages. We recommend leaving privacy mode enabled.',
-            'deletebot' => 'deletes your bot and frees its username.',
-            'http_token' => 'Token given by the botfather to recieve and send messages.',
+            'id_command' => 'Id Command',
+            'command_name' => 'Name of the command:',
+            'command_value' => 'Command, should start with /',
+            'argument' => 'Argument of the command. just one argument per command:',
+            'id_user' => 'Id User',
         ];
     }
 }

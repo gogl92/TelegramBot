@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Sticker".
+ * This is the model class for table "sticker".
  *
  * @property integer $idSticker
  * @property string $file_id
@@ -13,6 +13,8 @@ use Yii;
  * @property integer $height
  * @property integer $thumb
  * @property integer $file_size
+ * @property integer $id_user
+ * @property string $sticker_name
  */
 class Sticker extends \yii\db\ActiveRecord
 {
@@ -21,7 +23,7 @@ class Sticker extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Sticker';
+        return 'sticker';
     }
 
     /**
@@ -30,9 +32,10 @@ class Sticker extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_id', 'width', 'height', 'thumb'], 'required'],
-            [['width', 'height', 'thumb', 'file_size'], 'integer'],
-            [['file_id'], 'string', 'max' => 45]
+            [['file_id', 'width', 'height', 'id_user'], 'required'],
+            [['width', 'height', 'thumb', 'file_size', 'id_user'], 'integer'],
+            [['file_id'], 'string', 'max' => 45],
+            [['sticker_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -48,6 +51,8 @@ class Sticker extends \yii\db\ActiveRecord
             'height' => 'Sticker height',
             'thumb' => 'Sticker thumbnail in .webp or .jpg format',
             'file_size' => 'Optional. File size',
+            'id_user' => 'Id User',
+            'sticker_name' => 'Sticker Name',
         ];
     }
 }

@@ -11,6 +11,8 @@ use Yii;
  * @property integer $id_file
  * @property integer $id_action
  * @property integer $id_next_rule
+ * @property integer $id_user
+ * @property string $action_name
  */
 class file_rules extends \yii\db\ActiveRecord
 {
@@ -28,8 +30,9 @@ class file_rules extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_file', 'id_action', 'id_next_rule'], 'required'],
-            [['id_file', 'id_action', 'id_next_rule'], 'integer']
+            [['id_file', 'id_action', 'id_next_rule', 'id_user', 'action_name'], 'required'],
+            [['id_file', 'id_action', 'id_next_rule', 'id_user'], 'integer'],
+            [['action_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -43,6 +46,8 @@ class file_rules extends \yii\db\ActiveRecord
             'id_file' => 'List will appear: File,Audio, Image, Video, Sticker Location AND Max ',
             'id_action' => 'Send message (Text field pops up), Send file (File fild pops up) -> List with actions',
             'id_next_rule' => 'Id Next Rule',
+            'id_user' => 'Id User',
+            'action_name' => 'Action Name',
         ];
     }
 }

@@ -5,11 +5,13 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Location".
+ * This is the model class for table "location".
  *
  * @property integer $idLocation
  * @property double $longitude
  * @property double $latitude
+ * @property integer $id_user
+ * @property string $location_name
  */
 class Location extends \yii\db\ActiveRecord
 {
@@ -18,7 +20,7 @@ class Location extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Location';
+        return 'location';
     }
 
     /**
@@ -27,8 +29,10 @@ class Location extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['longitude', 'latitude'], 'required'],
-            [['longitude', 'latitude'], 'number']
+            [['longitude', 'latitude', 'id_user'], 'required'],
+            [['longitude', 'latitude'], 'number'],
+            [['id_user'], 'integer'],
+            [['location_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -41,6 +45,8 @@ class Location extends \yii\db\ActiveRecord
             'idLocation' => 'This object represents a point on the map.',
             'longitude' => 'Longitude as defined by sender',
             'latitude' => 'Latitude as defined by sender',
+            'id_user' => 'Id User',
+            'location_name' => 'Location Name',
         ];
     }
 }

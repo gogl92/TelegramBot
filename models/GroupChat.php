@@ -5,19 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "GroupChat".
+ * This is the model class for table "groupchat".
  *
  * @property integer $idGroupChat
  * @property string $title
+ * @property integer $id_user
+ * @property string $group_name
  */
-class GroupChat extends \yii\db\ActiveRecord
+class Groupchat extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'GroupChat';
+        return 'groupchat';
     }
 
     /**
@@ -26,7 +28,10 @@ class GroupChat extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'string', 'max' => 45]
+            [['id_user', 'group_name'], 'required'],
+            [['id_user'], 'integer'],
+            [['title'], 'string', 'max' => 45],
+            [['group_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -38,6 +43,8 @@ class GroupChat extends \yii\db\ActiveRecord
         return [
             'idGroupChat' => 'Unique identifier for this group chat',
             'title' => 'Group name',
+            'id_user' => 'Id User',
+            'group_name' => 'Group Name',
         ];
     }
 }

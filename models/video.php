@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "video".
  *
- * @property integer $idvideo
+ * @property integer $idVideo
  * @property string $file_id
  * @property integer $width
  * @property integer $height
@@ -15,6 +15,8 @@ use Yii;
  * @property integer $thumb
  * @property string $mime_type
  * @property integer $file_size
+ * @property integer $id_user
+ * @property string $video_name
  */
 class Video extends \yii\db\ActiveRecord
 {
@@ -32,10 +34,11 @@ class Video extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_id', 'width', 'height', 'duration'], 'required'],
-            [['width', 'height', 'duration', 'thumb', 'file_size'], 'integer'],
+            [['file_id', 'width', 'height', 'duration', 'id_user'], 'required'],
+            [['width', 'height', 'duration', 'thumb', 'file_size', 'id_user'], 'integer'],
             [['file_id'], 'string', 'max' => 45],
-            [['mime_type'], 'string', 'max' => 100]
+            [['mime_type'], 'string', 'max' => 100],
+            [['video_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -45,7 +48,7 @@ class Video extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idvideo' => 'This object represents a video file.',
+            'idVideo' => 'This object represents a video file.',
             'file_id' => 'Unique identifier for this file',
             'width' => 'Video width as defined by sender',
             'height' => 'Video height as defined by sender',
@@ -53,6 +56,8 @@ class Video extends \yii\db\ActiveRecord
             'thumb' => 'Video thumbnail',
             'mime_type' => 'Optional. Mime type of a file as defined by sender',
             'file_size' => 'Optional. File size',
+            'id_user' => 'Id User',
+            'video_name' => 'Video Name',
         ];
     }
 }

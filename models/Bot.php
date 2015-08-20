@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Bot".
+ * This is the model class for table "bot".
  *
  * @property integer $id_bot
  * @property string $name
@@ -17,6 +17,7 @@ use Yii;
  * @property integer $privacy
  * @property integer $deletebot
  * @property string $http_token
+ * @property integer $id_user
  */
 class Bot extends \yii\db\ActiveRecord
 {
@@ -25,7 +26,7 @@ class Bot extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Bot';
+        return 'bot';
     }
 
     /**
@@ -34,8 +35,8 @@ class Bot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'username', 'join_groups', 'privacy', 'deletebot'], 'required'],
-            [['bot_picture', 'join_groups', 'privacy', 'deletebot'], 'integer'],
+            [['name', 'username', 'join_groups', 'privacy', 'deletebot', 'id_user'], 'required'],
+            [['bot_picture', 'join_groups', 'privacy', 'deletebot', 'id_user'], 'integer'],
             [['name', 'username', 'http_token'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 512],
             [['about'], 'string', 'max' => 120]
@@ -58,6 +59,7 @@ class Bot extends \yii\db\ActiveRecord
             'privacy' => 'Privacy, determines which messages your bot will receive when added to a group. With privacy mode disabled, the bot will receive all messages. We recommend leaving privacy mode enabled.',
             'deletebot' => 'deletes your bot and frees its username.',
             'http_token' => 'Token given by the botfather to recieve and send messages.',
+            'id_user' => 'Id User',
         ];
     }
 }

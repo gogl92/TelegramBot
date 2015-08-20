@@ -13,6 +13,8 @@ use Yii;
  * @property string $type
  * @property integer $action
  * @property integer $id_next_rule
+ * @property integer $id_user
+ * @property string $action_name
  */
 class TextRules extends \yii\db\ActiveRecord
 {
@@ -30,9 +32,10 @@ class TextRules extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['command', 'recieved_message', 'type', 'action'], 'required'],
-            [['command', 'recieved_message', 'action', 'id_next_rule'], 'integer'],
-            [['type'], 'string', 'max' => 50]
+            [['command', 'recieved_message', 'type', 'action', 'id_user', 'action_name'], 'required'],
+            [['command', 'recieved_message', 'action', 'id_next_rule', 'id_user'], 'integer'],
+            [['type'], 'string', 'max' => 50],
+            [['action_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -48,6 +51,8 @@ class TextRules extends \yii\db\ActiveRecord
             'type' => 'Equals different containts < > >= <= between (Fileds text popup).',
             'action' => 'Send message (Text field pops up), Send file (File fild pops up).',
             'id_next_rule' => 'id of the next rule, could be empty.',
+            'id_user' => 'Id User',
+            'action_name' => 'Action Name',
         ];
     }
 }

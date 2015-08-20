@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\command;
+use app\models\Command;
 
 /**
- * commandSearch represents the model behind the search form about `app\models\command`.
+ * CommandSearch represents the model behind the search form about `app\models\Command`.
  */
-class commandSearch extends command
+class CommandSearch extends Command
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class commandSearch extends command
     public function rules()
     {
         return [
-            [['id_bot', 'bot_picture', 'join_groups', 'privacy', 'deletebot'], 'integer'],
-            [['name', 'username', 'description', 'about', 'http_token'], 'safe'],
+            [['id_command', 'id_user'], 'integer'],
+            [['command_name', 'command_value', 'argument'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class commandSearch extends command
      */
     public function search($params)
     {
-        $query = command::find();
+        $query = Command::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,18 +56,13 @@ class commandSearch extends command
         }
 
         $query->andFilterWhere([
-            'id_bot' => $this->id_bot,
-            'bot_picture' => $this->bot_picture,
-            'join_groups' => $this->join_groups,
-            'privacy' => $this->privacy,
-            'deletebot' => $this->deletebot,
+            'id_command' => $this->id_command,
+            'id_user' => $this->id_user,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'about', $this->about])
-            ->andFilterWhere(['like', 'http_token', $this->http_token]);
+        $query->andFilterWhere(['like', 'command_name', $this->command_name])
+            ->andFilterWhere(['like', 'command_value', $this->command_value])
+            ->andFilterWhere(['like', 'argument', $this->argument]);
 
         return $dataProvider;
     }

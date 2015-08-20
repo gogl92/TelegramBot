@@ -5,25 +5,27 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "PhotoSize".
+ * This is the model class for table "photosize".
  *
  * @property integer $idPhotoSize
  * @property string $file_id
  * @property integer $width
  * @property integer $height
  * @property integer $file_size
+ * @property integer $id_user
+ * @property string $file_name
  *
- * @property UserProfilePhotosPhotos[] $userProfilePhotosPhotos
- * @property UserProfilePhotos[] $idUserProfilePhotos
+ * @property UserprofilephotosPhotos[] $userprofilephotosPhotos
+ * @property Userprofilephotos[] $idUserProfilePhotos
  */
-class PhotoSize extends \yii\db\ActiveRecord
+class Photosize extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'PhotoSize';
+        return 'photosize';
     }
 
     /**
@@ -32,9 +34,10 @@ class PhotoSize extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_id', 'width', 'height'], 'required'],
-            [['width', 'height', 'file_size'], 'integer'],
-            [['file_id'], 'string', 'max' => 45]
+            [['file_id', 'width', 'height', 'id_user', 'file_name'], 'required'],
+            [['width', 'height', 'file_size', 'id_user'], 'integer'],
+            [['file_id'], 'string', 'max' => 45],
+            [['file_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -49,15 +52,17 @@ class PhotoSize extends \yii\db\ActiveRecord
             'width' => 'Photo width',
             'height' => 'Photo height',
             'file_size' => 'Optional. File size',
+            'id_user' => 'Id User',
+            'file_name' => 'File Name',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserProfilePhotosPhotos()
+    public function getUserprofilephotosPhotos()
     {
-        return $this->hasMany(UserProfilePhotosPhotos::className(), ['PhotoSize_idPhotoSize' => 'idPhotoSize']);
+        return $this->hasMany(UserprofilephotosPhotos::className(), ['PhotoSize_idPhotoSize' => 'idPhotoSize']);
     }
 
     /**
@@ -65,6 +70,6 @@ class PhotoSize extends \yii\db\ActiveRecord
      */
     public function getIdUserProfilePhotos()
     {
-        return $this->hasMany(UserProfilePhotos::className(), ['idUserProfilePhotos' => 'idUserProfilePhotos'])->viaTable('UserProfilePhotos_photos', ['PhotoSize_idPhotoSize' => 'idPhotoSize']);
+        return $this->hasMany(Userprofilephotos::className(), ['idUserProfilePhotos' => 'idUserProfilePhotos'])->viaTable('userprofilephotos_photos', ['PhotoSize_idPhotoSize' => 'idPhotoSize']);
     }
 }

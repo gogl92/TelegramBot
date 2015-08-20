@@ -5,13 +5,15 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Audio".
+ * This is the model class for table "audio".
  *
  * @property integer $idAudio
  * @property string $file_id
  * @property string $duration
  * @property string $mime_type
  * @property string $file_size
+ * @property integer $id_user
+ * @property string $file_name
  */
 class Audio extends \yii\db\ActiveRecord
 {
@@ -20,7 +22,7 @@ class Audio extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Audio';
+        return 'audio';
     }
 
     /**
@@ -29,8 +31,10 @@ class Audio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file_id', 'duration'], 'required'],
-            [['file_id', 'duration', 'mime_type', 'file_size'], 'string', 'max' => 45]
+            [['file_id', 'duration', 'id_user'], 'required'],
+            [['id_user'], 'integer'],
+            [['file_id', 'duration', 'mime_type', 'file_size'], 'string', 'max' => 45],
+            [['file_name'], 'string', 'max' => 255]
         ];
     }
 
@@ -45,6 +49,8 @@ class Audio extends \yii\db\ActiveRecord
             'duration' => 'Duration of the audio in seconds as defined by sender',
             'mime_type' => 'Optional. MIME type of the file as defined by sender',
             'file_size' => 'File Size',
+            'id_user' => 'Id User',
+            'file_name' => 'File Name',
         ];
     }
 }

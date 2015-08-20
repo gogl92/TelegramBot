@@ -5,13 +5,14 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Contact".
+ * This is the model class for table "contact".
  *
  * @property integer $idContact
  * @property string $phone_number
  * @property string $first_name
  * @property string $last_name
  * @property integer $user_id
+ * @property integer $id_user
  */
 class Contact extends \yii\db\ActiveRecord
 {
@@ -20,7 +21,7 @@ class Contact extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Contact';
+        return 'contact';
     }
 
     /**
@@ -29,8 +30,8 @@ class Contact extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['phone_number', 'first_name'], 'required'],
-            [['user_id'], 'integer'],
+            [['phone_number', 'first_name', 'id_user'], 'required'],
+            [['user_id', 'id_user'], 'integer'],
             [['phone_number', 'first_name', 'last_name'], 'string', 'max' => 100]
         ];
     }
@@ -46,6 +47,7 @@ class Contact extends \yii\db\ActiveRecord
             'first_name' => 'Contact\'s first name',
             'last_name' => 'Optional. Contact\'s last name',
             'user_id' => 'Optional. Contact\'s user identifier in Telegram',
+            'id_user' => 'Id User',
         ];
     }
 }

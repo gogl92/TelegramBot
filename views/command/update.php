@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\command */
+/* @var $model app\models\Command */
 
-$this->title = 'Update Command: ' . ' ' . $model->name;
+$this->title = 'Update Command: ' . ' ' . $model->id_command;
 $this->params['breadcrumbs'][] = ['label' => 'Commands', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id_bot]];
+$this->params['breadcrumbs'][] = ['label' => $model->id_command, 'url' => ['view', 'id' => $model->id_command]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="command-update">
