@@ -14,7 +14,7 @@ use app\models\ReplyKeyboardMarkup;
 use app\models\Bot;
 use app\models\Command;
 use app\models\Audio;
-
+use app\models\WebHook;
 
 class SiteController extends Controller
 {
@@ -97,11 +97,13 @@ class SiteController extends Controller
 	 */   
 	public function actionBot()
     {
-        $bot = new TelegramBot("107625524:AAECNEKwz9Gt8q9R-U3VQpGv9G6Rj6sIrpQ");
+/**        $bot = new TelegramBot("107625524:AAECNEKwz9Gt8q9R-U3VQpGv9G6Rj6sIrpQ");
         $keyboard = new ReplyKeyboardMarkup(TRUE, TRUE);
             return $this->render('telegram', [
                 'bot' => $bot, 'keyboard' => $keyboard,
-            ]);
+            ]); **/
+    //$webhook = new WebHook();
+    //$webhook->createWebhookFile();
     }
 	
 	/**
